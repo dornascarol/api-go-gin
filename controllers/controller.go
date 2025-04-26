@@ -31,3 +31,10 @@ func CreateNewSinger(c *gin.Context) {
 	database.DB.Create(&singer)
 	c.JSON(http.StatusOK, singer)
 }
+
+func SearchSingerById(c *gin.Context) {
+	var singer models.Singer
+	id := c.Params.ByName("id")
+	database.DB.First(&singer, id)
+	c.JSON(http.StatusOK, singer)
+}
