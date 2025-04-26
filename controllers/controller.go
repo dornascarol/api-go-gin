@@ -9,7 +9,9 @@ import (
 )
 
 func GetSingers(c *gin.Context) {
-	c.JSON(200, models.Singers)
+	var singers []models.Singer
+	database.DB.Find(&singers)
+	c.JSON(200, singers)
 }
 
 func Greeting(c *gin.Context) {

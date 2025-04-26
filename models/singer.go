@@ -8,5 +8,3 @@ type Singer struct {
 	SongName     string `json:"song_name"`
 	MusicalGenre string `json:"musical_genre"`
 }
-
-var Singers []Singer
