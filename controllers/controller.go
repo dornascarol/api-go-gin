@@ -14,13 +14,6 @@ func GetSingers(c *gin.Context) {
 	c.JSON(200, singers)
 }
 
-func Greeting(c *gin.Context) {
-	name := c.Params.ByName("name")
-	c.JSON(200, gin.H{
-		"API says:": "Okay, " + name + "?",
-	})
-}
-
 func CreateNewSinger(c *gin.Context) {
 	var singer models.Singer
 	if err := c.ShouldBindJSON(&singer); err != nil {
@@ -36,7 +29,6 @@ func SearchSingerById(c *gin.Context) {
 	var singer models.Singer
 	id := c.Params.ByName("id")
 	database.DB.First(&singer, id)
-
 	if singer.ID == 0 {
 		c.JSON(http.StatusNotFound, gin.H{
 			"Not found": "Singer not found"})
@@ -44,4 +36,12 @@ func SearchSingerById(c *gin.Context) {
 	}
 
 	c.JSON(http.StatusOK, singer)
+}
+
+func DeleteSinger(c *gin.Context) {
+	var singer models.Singer
+	id := c.Params.ByName("id")
+	database.DB.Delete(&singer, id)
+	c.JSON(http.StatusOK, gin.H{
+		"Data": "Singer deleted successfully"})
 }
