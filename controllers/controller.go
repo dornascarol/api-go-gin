@@ -45,3 +45,18 @@ func DeleteSinger(c *gin.Context) {
 	c.JSON(http.StatusOK, gin.H{
 		"Data": "Singer deleted successfully"})
 }
+
+func EditSinger(c *gin.Context) {
+	var singer models.Singer
+	id := c.Params.ByName("id")
+	database.DB.First(&singer, id)
+
+	if err := c.ShouldBindJSON(&singer); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+
+	database.DB.Model(&singer).UpdateColumns(singer)
+	c.JSON(http.StatusOK, singer)
+}

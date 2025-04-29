@@ -11,5 +11,6 @@ func HandleRequests() {
 	r.POST("/singers", controllers.CreateNewSinger)
 	r.GET("/singers/:id", controllers.SearchSingerById)
 	r.DELETE("/singers/:id", controllers.DeleteSinger)
+	r.PATCH("/singers/:id", controllers.EditSinger)
 	r.Run()
 }
