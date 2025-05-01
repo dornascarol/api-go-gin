@@ -63,11 +63,11 @@ docker-compose up
 | POST   | /singers     | Create a new singer                              |
 | GET    | /singers/:id | Get information of a specific singer             |
 | DELETE | /singers/:id | Delete a specific singer                         |
-| PUT    | /singers/:id | Update information of a specific singer          |
+| PATCH  | /singers/:id | Update information of a specific singer          |
 
 
 ## Request
-JSON format for the POST method to create a singer
+🔸 JSON format for the POST method to create a singer
 ```
 {
 	"artist_name": "Soweto",
@@ -76,6 +76,12 @@ JSON format for the POST method to create a singer
 }
 ```
 
+🔸 JSON format for the PATCH method to update a singer. At least one attribute field would be required
+```
+{
+	"song_name": "Farol das estrelas"
+}
+```
 
 ## Response
 🔸 Example of 200 - OK response for GET all singers
@@ -139,6 +145,19 @@ JSON format for the POST method to create a singer
 ```
 {
 	"Data": "Singer deleted successfully"
+}
+```
+
+🔸 Example of 200 - OK response for PATCH singer by ID
+```
+{
+	"ID": 2,
+	"CreatedAt": "2025-04-25T22:00:39.474979-03:00",
+	"UpdatedAt": "2025-04-25T22:00:39.474979-03:00",
+	"DeletedAt": null,
+	"artist_name": "Soweto",
+	"song_name": "Farol das estrelas",
+	"musical_genre": "Pagode"
 }
 ```
 
