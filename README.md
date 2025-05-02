@@ -57,16 +57,17 @@ docker-compose up
 
 `http://localhost:8080/singers`
 
-| Method | URL          | Description                                      |
-| ------ | -----------  | ------------------------------------------------ |
-| GET    | /singers     | List all singers                                 |
-| POST   | /singers     | Create a new singer                              |
-| GET    | /singers/:id | Get information of a specific singer             |
-| DELETE | /singers/:id | Delete a specific singer                         |
-| PATCH  | /singers/:id | Update information of a specific singer          |
+| Method | URL                 | Description                                      |
+| ------ | ------------------- | ------------------------------------------------ |
+| GET    | /singers            | List all singers                                 |
+| POST   | /singers            | Create a new singer                              |
+| GET    | /singers/:id        | Get information of a specific singer             |
+| DELETE | /singers/:id        | Delete a specific singer                         |
+| PATCH  | /singers/:id        | Update information of a specific singer          |
+| GET    | /singers/name/:name | Search specific singer by artist name            |
 
 
-## Request
+## Request body
 🔸 JSON format for the POST method to create a singer
 ```
 {
@@ -82,6 +83,7 @@ docker-compose up
 	"song_name": "Farol das estrelas"
 }
 ```
+
 
 ## Response
 🔸 Example of 200 - OK response for GET all singers
@@ -104,9 +106,19 @@ docker-compose up
 		"artist_name": "Soweto",
 		"song_name": "Antes de dizer adeus",
 		"musical_genre": "Pagode"
+	},
+	{
+		"ID": 3,
+		"CreatedAt": "2025-04-29T20:59:39.757229-03:00",
+		"UpdatedAt": "2025-04-29T20:59:39.757229-03:00",
+		"DeletedAt": null,
+		"artist_name": "Exaltasamba",
+		"song_name": "Gamei",
+		"musical_genre": "Pagode"
 	}
 ]
 ```
+.
 
 🔸 Example of 200 - OK response for POST create singer
 ```
@@ -120,6 +132,7 @@ docker-compose up
 	"musical_genre": "Pagode"
 }
 ```
+.
 
 🔸 Example of 200 - OK response for GET singer by ID
 ```
@@ -140,6 +153,7 @@ docker-compose up
 	"Not found": "Singer not found"
 }
 ```
+.
 
 🔸 Example of 200 - OK response for DELETE singer
 ```
@@ -147,6 +161,7 @@ docker-compose up
 	"Data": "Singer deleted successfully"
 }
 ```
+.
 
 🔸 Example of 200 - OK response for PATCH singer by ID
 ```
@@ -158,6 +173,27 @@ docker-compose up
 	"artist_name": "Soweto",
 	"song_name": "Farol das estrelas",
 	"musical_genre": "Pagode"
+}
+```
+.
+
+🔸 Example of 200 - OK response for GET singer by name
+```
+{
+	"ID": 3,
+	"CreatedAt": "2025-04-29T20:59:39.757229-03:00",
+	"UpdatedAt": "2025-04-29T20:59:39.757229-03:00",
+	"DeletedAt": null,
+	"artist_name": "Exaltasamba",
+	"song_name": "Gamei",
+	"musical_genre": "Pagode"
+}
+```
+
+🔸 Example of 404 - Not Found response for GET singer by name
+```
+{
+	"Not found": "Singer not found"
 }
 ```
 
