@@ -29,7 +29,10 @@ The container management tool <a href="https://www.docker.com/products/docker-de
 
 
 ## Running the project
-- To get the repository, clone it: `https://github.com/dornascarol/api-go-gin.git`.
+- To get the repository, clone it:
+```
+https://github.com/dornascarol/api-go-gin.git
+```
 
 - Command to check, update, and download the package manager modules (go.mod):
 ```
@@ -42,20 +45,43 @@ go run main.go
 ```
 
 - To stop the execution in the terminal: press `"Ctrl"` + `"C"`.
+<br>  
 
-- Command to run the `docker-compose.yml` file with two service images: one for Postgres and another for pgAdmin:
+### _Docker_
+
+- Command to run the `docker-compose.yml` file with two service images, one for Postgres and another for pgAdmin:
 ```
 docker-compose up
 ```
 
-- To run the database, open Docker Desktop and start the `gin-api-rest` container by clicking the start `Run` button..
+_Another way to run Docker_
 
-- URL to access pgAdmin: `localhost:54321`.
+- To find out the full name of the containers, write the command in the terminal:
+```
+docker ps -a
+```
+  
+- To run the containers, write the next command in the terminal:
+```
+docker start gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+```
+  
+- Stop the containers with the command in the terminal:
+```
+docker stop gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+```
+
+- URL to access pgAdmin:
+```
+localhost:54321
+```
 
 
 ## Endpoints
 
-`http://localhost:8080/singers`
+```
+http://localhost:8080/singers
+```
 
 | Method | URL                 | Description                                      |
 | ------ | ------------------- | ------------------------------------------------ |
