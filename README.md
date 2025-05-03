@@ -29,47 +29,48 @@ The container management tool <a href="https://www.docker.com/products/docker-de
 
 
 ## Running the project
-- To get the repository, clone it:
-```
-https://github.com/dornascarol/api-go-gin.git
-```
+1. **To get the repository, clone it:**
+	```bash
+	git clone https://github.com/dornascarol/api-go-gin.git
+	cd api-go-gin
+	```
 
-- Command to check, update, and download the package manager modules (go.mod):
-```
-go mod tidy
-```
+2. **Command to check, update, and download the package manager modules (go.mod):**
+	```
+	go mod tidy
+	```
 
-- Command to run the project in the terminal:
-```
-go run main.go
-```
+3. **Command to run the project in the terminal:**
+	```
+	go run main.go
+	```
 
-- To stop the execution in the terminal: press `"Ctrl"` + `"C"`.
+4. **To stop the execution in the terminal: press `"Ctrl"` + `"C"`.**
 <br>  
 
 ### _Docker_
 
-- Command to run the `docker-compose.yml` file with two service images, one for Postgres and another for pgAdmin:
-```
-docker-compose up
-```
+1. **Command to run the `docker-compose.yml` file with two service images, one for Postgres and another for pgAdmin:**
+	```
+	docker-compose up
+	```
 
 _Another way to run Docker_
 
-- To find out the full name of the containers, write the command in the terminal:
-```
-docker ps -a
-```
+1. **To find out the full name of the containers, write the command in the terminal:**
+	```
+	docker ps -a
+	```
   
-- To run the containers, write the next command in the terminal:
-```
-docker start gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
-```
+2. **To run the containers, write the next command in the terminal:**
+	```
+	docker start gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+	```
   
-- Stop the containers with the command in the terminal:
-```
-docker stop gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
-```
+3. **Stop the containers with the command in the terminal:**
+	```
+	docker stop gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+	```
 
 - URL to access pgAdmin:
 ```
@@ -79,40 +80,23 @@ localhost:54321
 
 ## Endpoints
 
-```
-http://localhost:8080/singers
-```
+| Method    | URL                 | Description                                      |
+| --------- | ------------------- | ------------------------------------------------ |
+| 1) GET    | /singers            | List all singers                                 | 
+| 2) POST   | /singers            | Create a new singer                              | 
+| 3) GET    | /singers/:id        | Get information of a specific singer             | 
+| 4) DELETE | /singers/:id        | Delete a specific singer                         | 
+| 5) PATCH  | /singers/:id        | Edit information of a specific singer          | 
+| 6) GET    | /singers/name/:name | Search specific singer by artist name            | 
 
-| Method | URL                 | Description                                      |
-| ------ | ------------------- | ------------------------------------------------ |
-| GET    | /singers            | List all singers                                 |
-| POST   | /singers            | Create a new singer                              |
-| GET    | /singers/:id        | Get information of a specific singer             |
-| DELETE | /singers/:id        | Delete a specific singer                         |
-| PATCH  | /singers/:id        | Update information of a specific singer          |
-| GET    | /singers/name/:name | Search specific singer by artist name            |
+.
 
-
-## Request body
-🔸 JSON format for the POST method to create a singer
-```
-{
-	"artist_name": "Soweto",
-	"song_name": "Antes de dizer adeus",
-	"musical_genre": "Pagode"
-}
-```
-
-🔸 JSON format for the PATCH method to update a singer. At least one attribute field would be required
-```
-{
-	"song_name": "Farol das estrelas"
-}
-```
-
-
-## Response
-🔸 Example of 200 - OK response for GET all singers
+### 1) All singers
+- URL params: localhost:8080/singers
+- Method: GET
+- Request body: empty
+- Response:
+Example of 200 - OK 
 ```
 [
 	{
@@ -144,9 +128,22 @@ http://localhost:8080/singers
 	}
 ]
 ```
-.
 
-🔸 Example of 200 - OK response for POST create singer
+----------------------------
+
+### 2) Create a singer
+- URL params: localhost:8080/singers
+- Method: POST
+- Request body JSON format: 
+```
+{
+	"artist_name": "Soweto",
+	"song_name": "Antes de dizer adeus",
+	"musical_genre": "Pagode"
+}
+```
+- Response:
+Example of 200 - OK
 ```
 {
 	"ID": 2,
@@ -158,9 +155,15 @@ http://localhost:8080/singers
 	"musical_genre": "Pagode"
 }
 ```
-.
 
-🔸 Example of 200 - OK response for GET singer by ID
+----------------------------
+
+### 3) Singer by ID
+- URL params: localhost:8080/singers/1
+- Method: GET
+- Request body: empty
+- Responses:
+Example of 200 - OK
 ```
 {
 	"ID": 1,
@@ -173,23 +176,40 @@ http://localhost:8080/singers
 }
 ```
 
-🔸 Example of 404 - Not Found response for GET singer by ID
+Example of 404 - Not Found 
 ```
 {
 	"Not found": "Singer not found"
 }
 ```
-.
 
-🔸 Example of 200 - OK response for DELETE singer
+----------------------------
+
+### 4) Delete singer
+- URL params: localhost:8080/singers/4
+- Method: DELETE
+- Request body: empty
+- Response:
+Example of 200 - OK
 ```
 {
 	"Data": "Singer deleted successfully"
 }
 ```
-.
 
-🔸 Example of 200 - OK response for PATCH singer by ID
+----------------------------
+
+### 5) Edit singer by ID
+- URL params: localhost:8080/singers/2
+- Method: PATCH
+- Request body JSON format. At least one attribute field would be required:
+```
+{
+	"song_name": "Farol das estrelas"
+}
+```  
+- Response:
+Example of 200 - OK 
 ```
 {
 	"ID": 2,
@@ -201,9 +221,15 @@ http://localhost:8080/singers
 	"musical_genre": "Pagode"
 }
 ```
-.
 
-🔸 Example of 200 - OK response for GET singer by name
+----------------------------
+
+### 6) Singer by name
+- URL params: localhost:8080/singers/name/Exaltasamba
+- Method: GET
+- Request body: empty
+- Response:
+Example of 200 - OK 
 ```
 {
 	"ID": 3,
@@ -216,7 +242,7 @@ http://localhost:8080/singers
 }
 ```
 
-🔸 Example of 404 - Not Found response for GET singer by name
+Example of 404 - Not Found 
 ```
 {
 	"Not found": "Singer not found"
