@@ -24,6 +24,12 @@ func CreateNewSinger(c *gin.Context) {
 		return
 	}
 
+	if err := models.ValidateSingerData(&singer); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+
 	database.DB.Create(&singer)
 	c.JSON(http.StatusOK, singer)
 }
@@ -62,7 +68,13 @@ func EditSinger(c *gin.Context) {
 		return
 	}
 
-	database.DB.Model(&singer).UpdateColumns(singer)
+	if err := models.ValidateSingerData(&singer); err != nil {
+		c.JSON(http.StatusBadRequest, gin.H{
+			"error": err.Error()})
+		return
+	}
+
+	database.DB.Save(&singer)
 	c.JSON(http.StatusOK, singer)
 }
 
