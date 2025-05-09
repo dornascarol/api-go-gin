@@ -16,6 +16,13 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package gorm.io/driver/postgres
 * Package gorm.io/gorm
 * Docker
+* Package validator.v2
+
+
+## Specs
+➥ Gin-gonic
+
+➥ Validations
 
 
 ## Tools
@@ -250,7 +257,7 @@ Example of 404 - Not Found
 ```
 
 
-## Postgres Image
+## Postgres image
 ```
   postgres:
     environment:
@@ -269,5 +276,5 @@ Example of 404 - Not Found
 ```
 
 
-## Project Status
+## Project status
 :construction: Application in progress.
