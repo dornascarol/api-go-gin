@@ -7,9 +7,9 @@ import (
 
 type Singer struct {
 	gorm.Model
-	ArtistName   string `json:"artist_name" validate:"nonzero"`
-	SongName     string `json:"song_name" validate:"nonzero"`
-	MusicalGenre string `json:"musical_genre" validate:"len=6"`
+	ArtistName   string `json:"artist_name" validate:"nonzero, min=1, max=50"`
+	SongName     string `json:"song_name" validate:"nonzero, min=1, max=100"`
+	MusicalGenre string `json:"musical_genre" validate:"nonzero, len=6, regexp=^[a-zA-Z]*$"`
 }
 
 func ValidateSingerData(singer *Singer) error {
