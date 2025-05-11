@@ -17,12 +17,16 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package gorm.io/gorm
 * Docker
 * Package validator.v2
+* Package testing
+* Package net/http/httptest
 
 
 ## Specs
 ➥ Gin-gonic
 
 ➥ Validations
+
+➥ Tests
 
 
 ## Tools
@@ -83,18 +87,38 @@ _Another way to run Docker_
 ```
 localhost:54321
 ```
+<br>  
+
+### _Tests_
+
+1. **To run the tests simultaneously:**
+   ```
+   go test -v ./...
+   ```
+
+_Another way to run Tests_
+
+1. **To run tests individually with more detailed outputs:**
+	```
+	go test -run TestFailed -v
+	```
+
+	```
+	go test -run TestGreetingStatusCode -v
+	```
 
 
 ## Endpoints
 
-| Method    | URL                 | Description                                      |
-| --------- | ------------------- | ------------------------------------------------ |
-| 1) GET    | /singers            | List all singers                                 | 
-| 2) POST   | /singers            | Create a new singer                              | 
-| 3) GET    | /singers/:id        | Get information of a specific singer             | 
-| 4) DELETE | /singers/:id        | Delete a specific singer                         | 
-| 5) PATCH  | /singers/:id        | Edit information of a specific singer          | 
-| 6) GET    | /singers/name/:name | Search specific singer by artist name            | 
+| Method    | URL                 | Description                                        |
+| --------- | ------------------- | -------------------------------------------------- |
+| 1) GET    | /singers            | List all singers                                   | 
+| 2) POST   | /singers            | Create a new singer                                | 
+| 3) GET    | /singers/:id        | Get information of a specific singer               | 
+| 4) DELETE | /singers/:id        | Delete a specific singer                           | 
+| 5) PATCH  | /singers/:id        | Edit information of a specific singer              | 
+| 6) GET    | /singers/name/:name | Search specific singer by artist name              | 
+| 7) GET    | /:name              | Returns the name passed in params inside a message |
 
 .
 
@@ -256,6 +280,20 @@ Example of 404 - Not Found
 }
 ```
 
+----------------------------
+
+### 7) Greeting
+- URL params: localhost:8080/Dornas
+- Method: GET
+- Request body: empty
+- Response:
+Example of 200 - OK 
+```
+{
+	"API says:": "Okay, Dornas?"
+}
+```
+
 
 ## Postgres image
 ```
@@ -275,6 +313,36 @@ Example of 404 - Not Found
       - "54321:80"
 ```
 
+
+## Tests
+This project includes automated testing to validate essential functionalities. Below are the main tests implemented:
+
+### ❌ TestFailed
+This is a purposefully failed test to demonstrate an error message.
+```
+=== RUN   TestFailed
+    main_test.go:18: Test failed intentionally!
+--- FAIL: TestFailed (0.00s)
+FAIL
+exit status 1
+FAIL    github.com/dornascarol/api-go-gin       1.047s
+```
+
+### ✅ TestGreetingStatusCode
+Test to verify that the greeting function returns the expected status code.
+```
+=== RUN   TestGreetingStatusCode
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /:name                    --> github.com/dornascarol/api-go-gin/controllers.Greeting (3 handlers)
+[GIN] 2025/05/11 - 16:57:50 | 200 |       556.8µs |                 | GET      "/Dornas"
+--- PASS: TestGreetingStatusCode (0.06s)
+PASS
+```
 
 ## Project status
 :construction: Application in progress.
