@@ -19,6 +19,7 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package validator.v2
 * Package testing
 * Package net/http/httptest
+* Package stretchr/testify/assert
 
 
 ## Specs
@@ -105,6 +106,13 @@ _Another way to run Tests_
 
 	```
 	go test -run TestGreetingStatusCode -v
+	```
+ 
+_Importing package testify/assert_
+
+1. **Command:**
+	```
+	go get github.com/stretchr/testify/assert@v1.10.0
 	```
 
 
