@@ -1,6 +1,8 @@
 package main
 
 import (
+	"fmt"
+	"io"
 	"net/http"
 	"net/http/httptest"
 	"testing"
@@ -27,4 +29,11 @@ func TestGreetingStatusCode(t *testing.T) {
 	r.ServeHTTP(response, req)
 
 	assert.Equal(t, http.StatusOK, response.Code, "Status should be equal")
+
+	mockResponse := `{"API says:":"Okay, Dornas?"}`
+	responseBody, _ := io.ReadAll(response.Body)
+	assert.Equal(t, mockResponse, string(responseBody))
+
+	fmt.Println(string(responseBody))
+	fmt.Println(mockResponse)
 }
