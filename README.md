@@ -20,6 +20,8 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package testing
 * Package net/http/httptest
 * Package stretchr/testify/assert
+* Package io
+* Package fmt
 
 
 ## Specs
@@ -41,6 +43,7 @@ The container management tool <a href="https://www.docker.com/products/docker-de
 
 
 ## Running the project
+
 1. **To get the repository, clone it:**
 	```bash
 	git clone https://github.com/dornascarol/api-go-gin.git
@@ -337,7 +340,7 @@ FAIL    github.com/dornascarol/api-go-gin       1.047s
 ```
 
 ### ✅ TestGreetingStatusCode
-Test to verify that the greeting function returns the expected status code.
+Test to verify that the greeting function returns the expected status code. Adding mock to the response and printing at the end.
 ```
 === RUN   TestGreetingStatusCode
 [GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
@@ -347,10 +350,14 @@ Test to verify that the greeting function returns the expected status code.
  - using code:  gin.SetMode(gin.ReleaseMode)
 
 [GIN-debug] GET    /:name                    --> github.com/dornascarol/api-go-gin/controllers.Greeting (3 handlers)
-[GIN] 2025/05/11 - 16:57:50 | 200 |       556.8µs |                 | GET      "/Dornas"
+[GIN] 2025/05/13 - 10:38:20 | 200 |            0s |                 | GET      "/Dornas"
+{"API says:":"Okay, Dornas?"}
+{"API says:":"Okay, Dornas?"}
 --- PASS: TestGreetingStatusCode (0.06s)
 PASS
+ok      github.com/dornascarol/api-go-gin       1.534s
 ```
+
 
 ## Project status
 :construction: Application in progress.
