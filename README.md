@@ -110,6 +110,10 @@ _Another way to run Tests_
 	```
 	go test -run TestGreetingStatusCode -v
 	```
+
+ 	```
+	go test -run TestAllSingersHandler -v
+	```
  
 _Importing package testify/assert_
 
@@ -356,6 +360,23 @@ Test to verify that the greeting function returns the expected status code. Addi
 --- PASS: TestGreetingStatusCode (0.06s)
 PASS
 ok      github.com/dornascarol/api-go-gin       1.534s
+```
+
+### ✅ TestAllSingersHandler
+Test to access the database and display all registered singer information.
+```
+=== RUN   TestAllSingersHandler
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /singers                  --> github.com/dornascarol/api-go-gin/controllers.GetSingers (3 handlers)
+[GIN] 2025/05/14 - 22:42:23 | 200 |     70.3342ms |                 | GET      "/singers"
+--- PASS: TestAllSingersHandler (1.09s)
+PASS
+ok      github.com/dornascarol/api-go-gin       1.379s
 ```
 
 
