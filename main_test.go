@@ -9,13 +9,27 @@ import (
 
 	"github.com/dornascarol/api-go-gin/controllers"
 	"github.com/dornascarol/api-go-gin/database"
+	"github.com/dornascarol/api-go-gin/models"
 	"github.com/gin-gonic/gin"
 	"github.com/stretchr/testify/assert"
 )
 
+var ID int
+
 func SetupTestRoutes() *gin.Engine {
 	routes := gin.Default()
 	return routes
+}
+
+func CreateSingerMock() {
+	singer := models.Singer{ArtistName: "Test Singer", SongName: "Test Music", MusicalGenre: "Test Pagode"}
+	database.DB.Create(&singer)
+	ID = int(singer.ID)
+}
+
+func DeleteSingerMock() {
+	var singer models.Singer
+	database.DB.Delete(&singer, ID)
 }
 
 func TestFailed(t *testing.T) {
@@ -41,6 +55,8 @@ func TestGreetingStatusCode(t *testing.T) {
 
 func TestAllSingersHandler(t *testing.T) {
 	database.ConnectToDatabase()
+	CreateSingerMock()
+	defer DeleteSingerMock()
 	r := SetupTestRoutes()
 	r.GET("/singers", controllers.GetSingers)
 	req, _ := http.NewRequest("GET", "/singers", nil)
