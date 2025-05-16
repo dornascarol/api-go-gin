@@ -330,7 +330,7 @@ Example of 200 - OK
 
 
 ## Tests
-This project includes automated testing to validate essential functionalities. Below are the main tests implemented:
+This project includes automated testing to validate essential functionalities. Running the test with at least one registered singer, in order to create and delete the mock for a singer ID. Below are the main tests implemented:
 
 ### ❌ TestFailed
 This is a purposefully failed test to demonstrate an error message.
