@@ -3,7 +3,7 @@
 _Project feature I learned at Alura_
 
 ## Introduction
-Developing a CRUD API using the Gin-Gonic framework with the objective of deepening technical knowledge in building a web application with Go, with a theme related to the universe of the pagode musical genre and using PostgreSQL as a database.
+Developing a CRUD API using the Gin-Gonic framework with the objective of deepening technical knowledge in building a web application with Go, with a theme related to the universe of the pagode musical genre and using Postgres as a database. Also adding skills with validations and tests.
 
 
 ## Technologies used
@@ -113,6 +113,10 @@ _Another way to run Tests_
 
  	```
 	go test -run TestAllSingersHandler -v
+	```
+
+  	```
+	go test -run TestSearchSingerByNameHandler -v
 	```
  
 _Importing package testify/assert_
@@ -377,6 +381,23 @@ Test to access the database and display all registered singer information.
 --- PASS: TestAllSingersHandler (1.09s)
 PASS
 ok      github.com/dornascarol/api-go-gin       1.379s
+```
+
+### ✅ TestSearchSingerByNameHandler
+Test to access the database and search for the name of the registered singer.
+```
+=== RUN   TestSearchSingerByNameHandler
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /singers/name/:name       --> github.com/dornascarol/api-go-gin/controllers.SearchSingerByName (3 handlers)
+[GIN] 2025/05/17 - 16:22:49 | 200 |     59.4503ms |                 | GET      "/singers/name/Exaltasamba"
+--- PASS: TestSearchSingerByNameHandler (1.18s)
+PASS
+ok      github.com/dornascarol/api-go-gin       1.544s
 ```
 
 
