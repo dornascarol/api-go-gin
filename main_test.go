@@ -17,6 +17,7 @@ import (
 var ID int
 
 func SetupTestRoutes() *gin.Engine {
+	gin.SetMode(gin.ReleaseMode)
 	routes := gin.Default()
 	return routes
 }
@@ -57,9 +58,24 @@ func TestAllSingersHandler(t *testing.T) {
 	database.ConnectToDatabase()
 	CreateSingerMock()
 	defer DeleteSingerMock()
+
 	r := SetupTestRoutes()
 	r.GET("/singers", controllers.GetSingers)
 	req, _ := http.NewRequest("GET", "/singers", nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+
+	assert.Equal(t, http.StatusOK, response.Code)
+}
+
+func TestSearchSingerByNameHandler(t *testing.T) {
+	database.ConnectToDatabase()
+	CreateSingerMock()
+	defer DeleteSingerMock()
+
+	r := SetupTestRoutes()
+	r.GET("/singers/name/:name", controllers.SearchSingerByName)
+	req, _ := http.NewRequest("GET", "/singers/name/Exaltasamba", nil)
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 
