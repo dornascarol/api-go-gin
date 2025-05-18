@@ -1,7 +1,6 @@
 package main
 
 import (
-	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
@@ -49,9 +48,6 @@ func TestGreetingStatusCode(t *testing.T) {
 	mockResponse := `{"API says:":"Okay, Dornas?"}`
 	responseBody, _ := io.ReadAll(response.Body)
 	assert.Equal(t, mockResponse, string(responseBody))
-
-	fmt.Println(string(responseBody))
-	fmt.Println(mockResponse)
 }
 
 func TestAllSingersHandler(t *testing.T) {
