@@ -15,6 +15,7 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package log
 * Package gorm.io/driver/postgres
 * Package gorm.io/gorm
+* Insomnia
 * Docker
 * Package validator.v2
 * Package testing
@@ -358,12 +359,10 @@ Test to verify that the greeting function returns the expected status code. Addi
  - using code:  gin.SetMode(gin.ReleaseMode)
 
 [GIN-debug] GET    /:name                    --> github.com/dornascarol/api-go-gin/controllers.Greeting (3 handlers)
-[GIN] 2025/05/13 - 10:38:20 | 200 |            0s |                 | GET      "/Dornas"
-{"API says:":"Okay, Dornas?"}
-{"API says:":"Okay, Dornas?"}
---- PASS: TestGreetingStatusCode (0.06s)
+[GIN] 2025/05/18 - 12:06:36 | 200 |       537.2µs |                 | GET      "/Dornas"
+--- PASS: TestGreetingStatusCode (0.05s)
 PASS
-ok      github.com/dornascarol/api-go-gin       1.534s
+ok      github.com/dornascarol/api-go-gin       0.299s
 ```
 
 ### ✅ TestAllSingersHandler
