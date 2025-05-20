@@ -119,6 +119,10 @@ _Another way to run Tests_
   	```
 	go test -run TestSearchSingerByNameHandler -v
 	```
+
+   	```
+	go test -run TestSearchSingerByIdHandler -v
+	```
  
 _Importing package testify/assert_
 
@@ -397,6 +401,25 @@ Test to access the database and search for the name of the registered singer.
 --- PASS: TestSearchSingerByNameHandler (1.18s)
 PASS
 ok      github.com/dornascarol/api-go-gin       1.544s
+```
+
+### ✅ TestSearchSingerByIdHandler
+Test to access the database and search for the ID of the registered singer. And check if the artist name, song name and musical genre of this singer have the same data based on the mock.
+
+Singer mock: {ArtistName: "Test Singer", SongName: "Test Music", MusicalGenre: "Test Pagode"}
+```
+=== RUN   TestSearchSingerByIdHandler
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] GET    /singers/:id              --> github.com/dornascarol/api-go-gin/controllers.SearchSingerById (3 handlers)
+[GIN] 2025/05/19 - 21:31:08 | 200 |      94.642ms |                 | GET      "/singers/32"
+--- PASS: TestSearchSingerByIdHandler (2.51s)
+PASS
+ok      github.com/dornascarol/api-go-gin       2.904s
 ```
 
 
