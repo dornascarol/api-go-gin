@@ -1,9 +1,11 @@
 package main
 
 import (
+	"encoding/json"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"testing"
 
 	"github.com/dornascarol/api-go-gin/controllers"
@@ -75,5 +77,26 @@ func TestSearchSingerByNameHandler(t *testing.T) {
 	response := httptest.NewRecorder()
 	r.ServeHTTP(response, req)
 
+	assert.Equal(t, http.StatusOK, response.Code)
+}
+
+func TestSearchSingerByIdHandler(t *testing.T) {
+	database.ConnectToDatabase()
+	CreateSingerMock()
+	defer DeleteSingerMock()
+
+	r := SetupTestRoutes()
+	r.GET("/singers/:id", controllers.SearchSingerById)
+	pathOfSearch := "/singers/" + strconv.Itoa(ID)
+	req, _ := http.NewRequest("GET", pathOfSearch, nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+
+	var mockSingerName models.Singer
+	json.Unmarshal(response.Body.Bytes(), &mockSingerName)
+
+	assert.Equal(t, "Test Singer", mockSingerName.ArtistName, "Singer names should be equal")
+	assert.Equal(t, "Test Music", mockSingerName.SongName)
+	assert.Equal(t, "Test Pagode", mockSingerName.MusicalGenre)
 	assert.Equal(t, http.StatusOK, response.Code)
 }
