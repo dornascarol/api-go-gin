@@ -100,3 +100,17 @@ func TestSearchSingerByIdHandler(t *testing.T) {
 	assert.Equal(t, "Test Pagode", mockSingerName.MusicalGenre)
 	assert.Equal(t, http.StatusOK, response.Code)
 }
+
+func TestDeleteSingerHandler(t *testing.T) {
+	database.ConnectToDatabase()
+	CreateSingerMock()
+
+	r := SetupTestRoutes()
+	r.DELETE("/singers/:id", controllers.DeleteSinger)
+	pathOfSearch := "/singers/" + strconv.Itoa(ID)
+	req, _ := http.NewRequest("DELETE", pathOfSearch, nil)
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+
+	assert.Equal(t, http.StatusOK, response.Code)
+}
