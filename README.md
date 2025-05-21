@@ -123,6 +123,11 @@ _Another way to run Tests_
    	```
 	go test -run TestSearchSingerByIdHandler -v
 	```
+
+	```
+ 	go test -run TestDeleteSingerHandler -v
+   	```
+    
  
 _Importing package testify/assert_
 
@@ -420,6 +425,23 @@ Singer mock: {ArtistName: "Test Singer", SongName: "Test Music", MusicalGenre: "
 --- PASS: TestSearchSingerByIdHandler (2.51s)
 PASS
 ok      github.com/dornascarol/api-go-gin       2.904s
+```
+
+### ✅ TestDeleteSingerHandler
+Test to access the database, create a mock and delete it.
+```
+=== RUN   TestDeleteSingerHandler
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] DELETE /singers/:id              --> github.com/dornascarol/api-go-gin/controllers.DeleteSinger (3 handlers)
+[GIN] 2025/05/20 - 20:50:12 | 200 |     29.8977ms |                 | DELETE   "/singers/35"
+--- PASS: TestDeleteSingerHandler (0.81s)
+PASS
+ok      github.com/dornascarol/api-go-gin       1.117s
 ```
 
 
