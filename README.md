@@ -127,6 +127,10 @@ _Another way to run Tests_
 	```
  	go test -run TestDeleteSingerHandler -v
    	```
+
+ 	```
+	go test -run TestEditSingerHandler -v
+  	```
     
  
 _Importing package testify/assert_
@@ -442,6 +446,23 @@ Test to access the database, create a mock and delete it.
 --- PASS: TestDeleteSingerHandler (0.81s)
 PASS
 ok      github.com/dornascarol/api-go-gin       1.117s
+```
+
+### ✅ TestEditSingerHandler
+Test to access the database, create, edit a mock and delete it.
+```
+=== RUN   TestEditSingerHandler
+[GIN-debug] [WARNING] Creating an Engine instance with the Logger and Recovery middleware already attached.
+
+[GIN-debug] [WARNING] Running in "debug" mode. Switch to "release" mode in production.
+ - using env:   export GIN_MODE=release
+ - using code:  gin.SetMode(gin.ReleaseMode)
+
+[GIN-debug] PATCH  /singers/:id              --> github.com/dornascarol/api-go-gin/controllers.EditSinger (3 handlers)
+[GIN] 2025/05/21 - 23:14:22 | 200 |     69.0304ms |                 | PATCH    "/singers/49"
+--- PASS: TestEditSingerHandler (1.69s)
+PASS
+ok      github.com/dornascarol/api-go-gin       1.960s
 ```
 
 
