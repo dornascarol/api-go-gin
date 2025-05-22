@@ -1,6 +1,7 @@
 package main
 
 import (
+	"bytes"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -113,4 +114,26 @@ func TestDeleteSingerHandler(t *testing.T) {
 	r.ServeHTTP(response, req)
 
 	assert.Equal(t, http.StatusOK, response.Code)
+}
+
+func TestEditSingerHandler(t *testing.T) {
+	database.ConnectToDatabase()
+	CreateSingerMock()
+	defer DeleteSingerMock()
+
+	r := SetupTestRoutes()
+	r.PATCH("/singers/:id", controllers.EditSinger)
+	singer := models.Singer{ArtistName: "Test Singer 2", SongName: "Test Music 2", MusicalGenre: "Pagode"}
+	valueJson, _ := json.Marshal(singer)
+	pathEdit := "/singers/" + strconv.Itoa(ID)
+	req, _ := http.NewRequest("PATCH", pathEdit, bytes.NewBuffer(valueJson))
+	response := httptest.NewRecorder()
+	r.ServeHTTP(response, req)
+
+	var updatedMockSinger models.Singer
+	json.Unmarshal(response.Body.Bytes(), &updatedMockSinger)
+
+	assert.Equal(t, "Test Singer 2", updatedMockSinger.ArtistName)
+	assert.Equal(t, "Test Music 2", updatedMockSinger.SongName)
+	assert.Equal(t, "Pagode", updatedMockSinger.MusicalGenre)
 }
