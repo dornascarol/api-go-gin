@@ -7,12 +7,13 @@ import (
 
 func HandleRequests() {
 	r := gin.Default()
+	r.LoadHTMLGlob("templates/*")
 	r.GET("/singers", controllers.GetSingers)
 	r.POST("/singers", controllers.CreateNewSinger)
 	r.GET("/singers/:id", controllers.SearchSingerById)
 	r.DELETE("/singers/:id", controllers.DeleteSinger)
-	r.PATCH("/singers/:id", controllers.EditSinger)
 	r.GET("/singers/name/:name", controllers.SearchSingerByName)
 	r.GET("/:name", controllers.Greeting)
+	r.GET("/index", controllers.DisplayIndexPage)
 	r.Run()
 }
