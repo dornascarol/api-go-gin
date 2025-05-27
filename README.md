@@ -23,6 +23,7 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package stretchr/testify/assert
 * Package io
 * Package fmt
+* Index.HTML
 
 
 ## Specs
@@ -31,6 +32,8 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 ➥ Validations
 
 ➥ Tests
+
+➥ Template in HTML rendering
 
 
 ## Tools
