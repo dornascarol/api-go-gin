@@ -8,6 +8,7 @@ import (
 func HandleRequests() {
 	r := gin.Default()
 	r.LoadHTMLGlob("templates/*")
+	r.Static("/assets", "./assets")
 	r.GET("/singers", controllers.GetSingers)
 	r.POST("/singers", controllers.CreateNewSinger)
 	r.GET("/singers/:id", controllers.SearchSingerById)
