@@ -17,5 +17,6 @@ func HandleRequests() {
 	r.GET("/singers/name/:name", controllers.SearchSingerByName)
 	r.GET("/:name", controllers.Greeting)
 	r.GET("/index", controllers.DisplayIndexPage)
+	r.NoRoute(controllers.RouteNotFound)
 	r.Run()
 }
