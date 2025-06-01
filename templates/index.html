@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link rel="stylesheet" href="../assets/index.css">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Singers</title>
+</head>
+<body>
+    <div class="widget-wrap">
+        <h1>Pagodão 🎤</h1>
+        <h2>API Gin-Gonic in Go</h2>
+        <div class="widget-wrap">
+            <ul id="the-list">
+                {{range .singers}}
+                <li>{{.ArtistName}}</li>
+                {{end}}
+            </ul>
+    </div>
+</body>
+</html>
