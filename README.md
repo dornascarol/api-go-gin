@@ -35,6 +35,8 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 
 ➥ Template in HTML rendering
 
+➥ Swagger
+
 
 ## Tools
 The <a href="https://go.dev/doc/install" target="_blank"> Go</a> programming language was installed on Windows, version 1.24.0.
