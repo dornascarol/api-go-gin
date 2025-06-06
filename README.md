@@ -471,5 +471,18 @@ ok      github.com/dornascarol/api-go-gin       1.960s
 ```
 
 
+## Swagger
+From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> documentation</a>, follow these steps:
+
+1. **Command to download the package:**
+	```
+	go get -d github.com/swaggo/swag/cmd/swag
+	```
+	```
+	go install github.com/swaggo/swag/cmd/swag@latest
+	```
+
+
+
 ## Project status
 :construction: Application in progress.
