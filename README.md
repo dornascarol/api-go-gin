@@ -481,7 +481,10 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
 	```
 	go install github.com/swaggo/swag/cmd/swag@latest
 	```
-
+2. **Command to initialize:**
+	```
+	swag init
+	```
 
 
 ## Project status
