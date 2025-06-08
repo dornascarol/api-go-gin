@@ -485,6 +485,10 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
 	```
 	swag init
 	```
+3. **Command to download the echo-swagger lib**
+	```
+	go get -u github.com/swaggo/echo-swagger
+ 	```
 
 
 ## Project status
