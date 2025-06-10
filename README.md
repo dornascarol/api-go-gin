@@ -24,6 +24,7 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package io
 * Package fmt
 * Index.HTML
+* Swagger
 
 
 ## Specs
@@ -489,6 +490,12 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
 	```
 	go get -u github.com/swaggo/echo-swagger
  	```
+4. **Import into the api.go file following my user in this repository:**
+   	```
+    	echoSwagger "github.com/swaggo/echo-swagger"
+
+	_ "github.com/dornascarol/api-go-gin/docs"
+    	```
 
 
 ## Project status
