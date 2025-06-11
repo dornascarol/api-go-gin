@@ -8,6 +8,18 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// SearchSingerById godoc
+//
+//	@Summary		Search singer by Id
+//	@Description	Get information of a specific singer
+//	@Tags			singers
+//	@Accept			json
+//	@Produce		json
+//	@Param			id	path		int	true	"Singer ID"
+//	@Success		200	{object}	models.Singer
+//	@Failure		404	{object}	httputil.HTTPError
+
+// @Router			/singers/{id} [get]
 func SearchSingerById(c *gin.Context) {
 	var singer models.Singer
 	id := c.Params.ByName("id")
