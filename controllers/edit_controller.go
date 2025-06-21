@@ -8,6 +8,19 @@ import (
 	"github.com/gin-gonic/gin"
 )
 
+// EditSinger godoc
+//
+// @Summary      Edit an existing singer
+// @Description  Updates the details of a singer in the database using their unique ID
+// @Tags         singers
+// @Accept       json
+// @Produce      json
+// @Param        id      path      int           true  "Singer ID"
+// @Param        singer  body      models.Singer true  "Updated singer data"
+// @Success      200     {object}  models.Singer
+// @Failure      400     {object}  map[string]string
+// @Failure      404     {object}  map[string]string
+// @Router       /singers/{id} [patch]
 func EditSinger(c *gin.Context) {
 	var singer models.Singer
 	id := c.Params.ByName("id")

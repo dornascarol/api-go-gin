@@ -10,15 +10,14 @@ import (
 
 // SearchSingerById godoc
 //
-//	@Summary		Search singer by Id
-//	@Description	Get information of a specific singer
-//	@Tags			singers
-//	@Accept			json
-//	@Produce		json
-//	@Param			id	path		int	true	"Singer ID"
-//	@Success		200	{object}	models.Singer
-//	@Failure		404	{object}	httputil.HTTPError
-
+// @Summary		Search singer by Id
+// @Description	Get details of a singer using their unique ID
+// @Tags			singers
+// @Accept			json
+// @Produce		json
+// @Param			id	path		int	true	"Singer ID"
+// @Success		200	{object}	models.Singer
+// @Failure		404	{object}	map[string]string
 // @Router			/singers/{id} [get]
 func SearchSingerById(c *gin.Context) {
 	var singer models.Singer
