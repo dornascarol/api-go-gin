@@ -1,0 +1,219 @@
+definitions:
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  models.Singer:
+    properties:
+      artist_name:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      musical_genre:
+        type: string
+      song_name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /{name}:
+    get:
+      consumes:
+      - application/json
+      description: Returns Returns a greeting message for the user with the provided
+        name
+      parameters:
+      - description: Name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Greet a name
+      tags:
+      - name
+  /singers:
+    get:
+      consumes:
+      - application/json
+      description: Get a list of all singers from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            items:
+              $ref: '#/definitions/models.Singer'
+            type: array
+      summary: Retrieve all singers
+      tags:
+      - singers
+    post:
+      consumes:
+      - application/json
+      description: Adds a new singer to the database
+      parameters:
+      - description: Singer data
+        in: body
+        name: singer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Singer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new singer
+      tags:
+      - singers
+  /singers/{id}:
+    delete:
+      consumes:
+      - application/json
+      description: Removes a singer from the database using their unique ID
+      parameters:
+      - description: Singer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a singer by ID
+      tags:
+      - singers
+    get:
+      consumes:
+      - application/json
+      description: Get details of a singer using their unique ID
+      parameters:
+      - description: Singer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Search singer by Id
+      tags:
+      - singers
+    patch:
+      consumes:
+      - application/json
+      description: Updates the details of a singer in the database using their unique
+        ID
+      parameters:
+      - description: Singer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Updated singer data
+        in: body
+        name: singer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Singer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "400":
+          description: Bad Request
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Edit an existing singer
+      tags:
+      - singers
+  /singers/name/{name}:
+    get:
+      consumes:
+      - application/json
+      description: Get details of a singer using their artist name
+      parameters:
+      - description: Artist Name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: OK
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "404":
+          description: Not Found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Retrieve a singer by name
+      tags:
+      - singers
+swagger: "2.0"
