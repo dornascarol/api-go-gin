@@ -484,7 +484,7 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
 	```
 2. **Command to initialize:**
 	```
-	swag init
+	swag init --parseDependency --parseInternal --parseDepth 1
 	```
 3. **Command to download the echo-swagger lib**
 	```
