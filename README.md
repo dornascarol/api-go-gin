@@ -486,10 +486,13 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
 	```
 	swag init --parseDependency --parseInternal --parseDepth 1
 	```
-3. **Command to download the echo-swagger lib**
+3. **Command to generate Swagger 2.0 documents:**
 	```
-	go get -u github.com/swaggo/echo-swagger
+	go get -u github.com/swaggo/gin-swagger
  	```
+ 	```
+  	go get -u github.com/swaggo/files
+  	```
 4. **Import into the api.go file following my user in this repository:**
    	```
     	echoSwagger "github.com/swaggo/echo-swagger"
