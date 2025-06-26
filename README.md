@@ -493,12 +493,14 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
  	```
   	go get -u github.com/swaggo/files
   	```
-4. **Import into the api.go file following my user in this repository:**
-   	```
-    	echoSwagger "github.com/swaggo/echo-swagger"
-
-	_ "github.com/dornascarol/api-go-gin/docs"
-    	```
+4. **Write in the import() of the `routes.go` file:**
+   ```
+   docs "github.com/go-project-name/docs"
+    
+   swaggerfiles "github.com/swaggo/files"
+    
+   ginSwagger "github.com/swaggo/gin-swagger"
+    ```
 
 
 ## Project status
