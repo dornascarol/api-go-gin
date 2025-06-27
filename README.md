@@ -504,4 +504,4 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
 
 
 ## Project status
-:construction: Application in progress.
+:heavy_check_mark: Application completed.
