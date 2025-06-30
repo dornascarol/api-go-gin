@@ -9,15 +9,13 @@ import (
 )
 
 // SearchSingerByName godoc
-//
-// @Summary      Retrieve a singer by name
-// @Description  Get details of a singer using their artist name
+// @Summary      Get a singer by name
+// @Description  Retrieves a singer from the database by their artist name
 // @Tags         singers
-// @Accept       json
 // @Produce      json
-// @Param        name  path      string  true  "Artist Name"
-// @Success      200   {object}  models.Singer
-// @Failure      404   {object}  map[string]string
+// @Param        name  path      string  true  "Artist name"
+// @Success      200   {object}  models.Singer "Successful response with the singer data"
+// @Failure      404   {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/name/{name} [get]
 func SearchSingerByName(c *gin.Context) {
 	var singer models.Singer

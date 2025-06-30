@@ -9,15 +9,14 @@ import (
 )
 
 // CreateNewSinger godoc
-//
 // @Summary      Create a new singer
 // @Description  Adds a new singer to the database
 // @Tags         singers
 // @Accept       json
 // @Produce      json
 // @Param        singer  body      models.Singer  true  "Singer data"
-// @Success      200     {object}  models.Singer
-// @Failure      400     {object}  map[string]string
+// @Success      200     {object}  models.Singer "Successful response with the created singer data"
+// @Failure      400     {object}  map[string]string "Error response with validation message"
 // @Router       /singers [post]
 func CreateNewSinger(c *gin.Context) {
 	var singer models.Singer

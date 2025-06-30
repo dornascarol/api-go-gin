@@ -7,13 +7,12 @@ import (
 )
 
 // GetSingers godoc
-//
-// @Summary      Retrieve all singers
-// @Description  Get a list of all singers from the database
+// @Summary      Get all singers
+// @Description  Retrieves a list of all singers from the database
 // @Tags         singers
-// @Accept       json
 // @Produce      json
-// @Success      200  {array}   models.Singer
+// @Success      200  {array}   models.Singer "Successful response with a list of singers"
+// @Failure      500  {object}  map[string]string "Error response for internal server error"
 // @Router       /singers [get]
 func GetSingers(c *gin.Context) {
 	var singers []models.Singer

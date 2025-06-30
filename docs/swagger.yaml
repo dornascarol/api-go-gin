@@ -7,6 +7,16 @@ definitions:
         description: Valid is true if Time is not NULL
         type: boolean
     type: object
+  models.DeleteResponse:
+    properties:
+      data:
+        type: string
+    type: object
+  models.GreetingResponse:
+    properties:
+      message:
+        type: string
+    type: object
   models.Singer:
     properties:
       artist_name:
@@ -29,12 +39,9 @@ info:
 paths:
   /{name}:
     get:
-      consumes:
-      - application/json
-      description: Returns Returns a greeting message for the user with the provided
-        name
+      description: Returns a personalized greeting message
       parameters:
-      - description: Name
+      - description: Name for the greeting
         in: path
         name: name
         required: true
@@ -43,29 +50,43 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Successful response with greeting
+          schema:
+            $ref: '#/definitions/models.GreetingResponse'
+        "400":
+          description: Error response for invalid parameters
           schema:
             additionalProperties:
               type: string
             type: object
-      summary: Greet a name
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get personalized greeting
       tags:
       - name
   /singers:
     get:
-      consumes:
-      - application/json
-      description: Get a list of all singers from the database
+      description: Retrieves a list of all singers from the database
       produces:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Successful response with a list of singers
           schema:
             items:
               $ref: '#/definitions/models.Singer'
             type: array
-      summary: Retrieve all singers
+        "500":
+          description: Error response for internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all singers
       tags:
       - singers
     post:
@@ -83,11 +104,11 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Successful response with the created singer data
           schema:
             $ref: '#/definitions/models.Singer'
         "400":
-          description: Bad Request
+          description: Error response with validation message
           schema:
             additionalProperties:
               type: string
@@ -97,9 +118,7 @@ paths:
       - singers
   /singers/{id}:
     delete:
-      consumes:
-      - application/json
-      description: Removes a singer from the database using their unique ID
+      description: Deletes a singer from the database by ID
       parameters:
       - description: Singer ID
         in: path
@@ -110,24 +129,20 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Successful response with deletion message
+          schema:
+            $ref: '#/definitions/models.DeleteResponse'
+        "404":
+          description: Error response if singer not found
           schema:
             additionalProperties:
               type: string
             type: object
-        "400":
-          description: Bad Request
-          schema:
-            additionalProperties:
-              type: string
-            type: object
-      summary: Delete a singer by ID
+      summary: Delete a singer
       tags:
       - singers
     get:
-      consumes:
-      - application/json
-      description: Get details of a singer using their unique ID
+      description: Retrieves a singer from the database by their ID
       parameters:
       - description: Singer ID
         in: path
@@ -138,30 +153,29 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Successful response with the singer data
           schema:
             $ref: '#/definitions/models.Singer'
         "404":
-          description: Not Found
+          description: Error response if singer not found
           schema:
             additionalProperties:
               type: string
             type: object
-      summary: Search singer by Id
+      summary: Get a singer by ID
       tags:
       - singers
     patch:
       consumes:
       - application/json
-      description: Updates the details of a singer in the database using their unique
-        ID
+      description: Updates an existing singer in the database by ID
       parameters:
       - description: Singer ID
         in: path
         name: id
         required: true
         type: integer
-      - description: Updated singer data
+      - description: Singer data to update
         in: body
         name: singer
         required: true
@@ -171,31 +185,29 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Successful response with the updated singer data
           schema:
             $ref: '#/definitions/models.Singer'
         "400":
-          description: Bad Request
+          description: Error response with validation message
           schema:
             additionalProperties:
               type: string
             type: object
         "404":
-          description: Not Found
+          description: Error response if singer not found
           schema:
             additionalProperties:
               type: string
             type: object
-      summary: Edit an existing singer
+      summary: Edit a singer
       tags:
       - singers
   /singers/name/{name}:
     get:
-      consumes:
-      - application/json
-      description: Get details of a singer using their artist name
+      description: Retrieves a singer from the database by their artist name
       parameters:
-      - description: Artist Name
+      - description: Artist name
         in: path
         name: name
         required: true
@@ -204,16 +216,16 @@ paths:
       - application/json
       responses:
         "200":
-          description: OK
+          description: Successful response with the singer data
           schema:
             $ref: '#/definitions/models.Singer'
         "404":
-          description: Not Found
+          description: Error response if singer not found
           schema:
             additionalProperties:
               type: string
             type: object
-      summary: Retrieve a singer by name
+      summary: Get a singer by name
       tags:
       - singers
 swagger: "2.0"

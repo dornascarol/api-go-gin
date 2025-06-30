@@ -9,17 +9,16 @@ import (
 )
 
 // EditSinger godoc
-//
-// @Summary      Edit an existing singer
-// @Description  Updates the details of a singer in the database using their unique ID
+// @Summary      Edit a singer
+// @Description  Updates an existing singer in the database by ID
 // @Tags         singers
 // @Accept       json
 // @Produce      json
-// @Param        id      path      int           true  "Singer ID"
-// @Param        singer  body      models.Singer true  "Updated singer data"
-// @Success      200     {object}  models.Singer
-// @Failure      400     {object}  map[string]string
-// @Failure      404     {object}  map[string]string
+// @Param        id     path      int           true  "Singer ID"
+// @Param        singer body      models.Singer true  "Singer data to update"
+// @Success      200    {object}  models.Singer "Successful response with the updated singer data"
+// @Failure      400    {object}  map[string]string "Error response with validation message"
+// @Failure      404    {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/{id} [patch]
 func EditSinger(c *gin.Context) {
 	var singer models.Singer

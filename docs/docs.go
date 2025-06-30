@@ -17,24 +17,30 @@ const docTemplate = `{
     "paths": {
         "/singers": {
             "get": {
-                "description": "Get a list of all singers from the database",
-                "consumes": [
-                    "application/json"
-                ],
+                "description": "Retrieves a list of all singers from the database",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "singers"
                 ],
-                "summary": "Retrieve all singers",
+                "summary": "Get all singers",
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful response with a list of singers",
                         "schema": {
                             "type": "array",
                             "items": {
                                 "$ref": "#/definitions/models.Singer"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error response for internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
                             }
                         }
                     }
@@ -65,13 +71,13 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful response with the created singer data",
                         "schema": {
                             "$ref": "#/definitions/models.Singer"
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "Error response with validation message",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
@@ -84,21 +90,18 @@ const docTemplate = `{
         },
         "/singers/name/{name}": {
             "get": {
-                "description": "Get details of a singer using their artist name",
-                "consumes": [
-                    "application/json"
-                ],
+                "description": "Retrieves a singer from the database by their artist name",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "singers"
                 ],
-                "summary": "Retrieve a singer by name",
+                "summary": "Get a singer by name",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Artist Name",
+                        "description": "Artist name",
                         "name": "name",
                         "in": "path",
                         "required": true
@@ -106,13 +109,13 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful response with the singer data",
                         "schema": {
                             "$ref": "#/definitions/models.Singer"
                         }
                     },
                     "404": {
-                        "description": "Not Found",
+                        "description": "Error response if singer not found",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
@@ -125,17 +128,14 @@ const docTemplate = `{
         },
         "/singers/{id}": {
             "get": {
-                "description": "Get details of a singer using their unique ID",
-                "consumes": [
-                    "application/json"
-                ],
+                "description": "Retrieves a singer from the database by their ID",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "singers"
                 ],
-                "summary": "Search singer by Id",
+                "summary": "Get a singer by ID",
                 "parameters": [
                     {
                         "type": "integer",
@@ -147,13 +147,13 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful response with the singer data",
                         "schema": {
                             "$ref": "#/definitions/models.Singer"
                         }
                     },
                     "404": {
-                        "description": "Not Found",
+                        "description": "Error response if singer not found",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
@@ -164,17 +164,14 @@ const docTemplate = `{
                 }
             },
             "delete": {
-                "description": "Removes a singer from the database using their unique ID",
-                "consumes": [
-                    "application/json"
-                ],
+                "description": "Deletes a singer from the database by ID",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "singers"
                 ],
-                "summary": "Delete a singer by ID",
+                "summary": "Delete a singer",
                 "parameters": [
                     {
                         "type": "integer",
@@ -186,16 +183,13 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful response with deletion message",
                         "schema": {
-                            "type": "object",
-                            "additionalProperties": {
-                                "type": "string"
-                            }
+                            "$ref": "#/definitions/models.DeleteResponse"
                         }
                     },
-                    "400": {
-                        "description": "Bad Request",
+                    "404": {
+                        "description": "Error response if singer not found",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
@@ -206,7 +200,7 @@ const docTemplate = `{
                 }
             },
             "patch": {
-                "description": "Updates the details of a singer in the database using their unique ID",
+                "description": "Updates an existing singer in the database by ID",
                 "consumes": [
                     "application/json"
                 ],
@@ -216,7 +210,7 @@ const docTemplate = `{
                 "tags": [
                     "singers"
                 ],
-                "summary": "Edit an existing singer",
+                "summary": "Edit a singer",
                 "parameters": [
                     {
                         "type": "integer",
@@ -226,7 +220,7 @@ const docTemplate = `{
                         "required": true
                     },
                     {
-                        "description": "Updated singer data",
+                        "description": "Singer data to update",
                         "name": "singer",
                         "in": "body",
                         "required": true,
@@ -237,13 +231,13 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful response with the updated singer data",
                         "schema": {
                             "$ref": "#/definitions/models.Singer"
                         }
                     },
                     "400": {
-                        "description": "Bad Request",
+                        "description": "Error response with validation message",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
@@ -252,7 +246,7 @@ const docTemplate = `{
                         }
                     },
                     "404": {
-                        "description": "Not Found",
+                        "description": "Error response if singer not found",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
@@ -265,21 +259,18 @@ const docTemplate = `{
         },
         "/{name}": {
             "get": {
-                "description": "Returns Returns a greeting message for the user with the provided name",
-                "consumes": [
-                    "application/json"
-                ],
+                "description": "Returns a personalized greeting message",
                 "produces": [
                     "application/json"
                 ],
                 "tags": [
                     "name"
                 ],
-                "summary": "Greet a name",
+                "summary": "Get personalized greeting",
                 "parameters": [
                     {
                         "type": "string",
-                        "description": "Name",
+                        "description": "Name for the greeting",
                         "name": "name",
                         "in": "path",
                         "required": true
@@ -287,7 +278,22 @@ const docTemplate = `{
                 ],
                 "responses": {
                     "200": {
-                        "description": "OK",
+                        "description": "Successful response with greeting",
+                        "schema": {
+                            "$ref": "#/definitions/models.GreetingResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error response for invalid parameters",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
                         "schema": {
                             "type": "object",
                             "additionalProperties": {
@@ -309,6 +315,22 @@ const docTemplate = `{
                 "valid": {
                     "description": "Valid is true if Time is not NULL",
                     "type": "boolean"
+                }
+            }
+        },
+        "models.DeleteResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.GreetingResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
                 }
             }
         },

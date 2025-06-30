@@ -9,21 +9,20 @@ import (
 )
 
 // DeleteSinger godoc
-//
-// @Summary      Delete a singer by ID
-// @Description  Removes a singer from the database using their unique ID
+// @Summary      Delete a singer
+// @Description  Deletes a singer from the database by ID
 // @Tags         singers
-// @Accept       json
 // @Produce      json
 // @Param        id   path      int  true  "Singer ID"
-// @Success      200  {object}  map[string]string
-// @Failure      400  {object}  map[string]string
+// @Success      200  {object}  models.DeleteResponse "Successful response with deletion message"
+// @Failure      404  {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/{id} [delete]
 func DeleteSinger(c *gin.Context) {
 	var singer models.Singer
 	id := c.Params.ByName("id")
 
 	database.DB.Delete(&singer, id)
-	c.JSON(http.StatusOK, gin.H{
-		"Data": "Singer deleted successfully"})
+	c.JSON(http.StatusOK, models.DeleteResponse{
+		Data: "Singer deleted successfully",
+	})
 }
