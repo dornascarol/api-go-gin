@@ -1,0 +1,353 @@
+{
+    "swagger": "2.0",
+    "info": {
+        "contact": {}
+    },
+    "paths": {
+        "/singers": {
+            "get": {
+                "description": "Retrieves a list of all singers from the database",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "singers"
+                ],
+                "summary": "Get all singers",
+                "responses": {
+                    "200": {
+                        "description": "Successful response with a list of singers",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/models.Singer"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Error response for internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "description": "Adds a new singer to the database",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "singers"
+                ],
+                "summary": "Create a new singer",
+                "parameters": [
+                    {
+                        "description": "Singer data",
+                        "name": "singer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Singer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with the created singer data",
+                        "schema": {
+                            "$ref": "#/definitions/models.Singer"
+                        }
+                    },
+                    "400": {
+                        "description": "Error response with validation message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/singers/name/{name}": {
+            "get": {
+                "description": "Retrieves a singer from the database by their artist name",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "singers"
+                ],
+                "summary": "Get a singer by name",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Artist name",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with the singer data",
+                        "schema": {
+                            "$ref": "#/definitions/models.Singer"
+                        }
+                    },
+                    "404": {
+                        "description": "Error response if singer not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/singers/{id}": {
+            "get": {
+                "description": "Retrieves a singer from the database by their ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "singers"
+                ],
+                "summary": "Get a singer by ID",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Singer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with the singer data",
+                        "schema": {
+                            "$ref": "#/definitions/models.Singer"
+                        }
+                    },
+                    "404": {
+                        "description": "Error response if singer not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "description": "Deletes a singer from the database by ID",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "singers"
+                ],
+                "summary": "Delete a singer",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Singer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with deletion message",
+                        "schema": {
+                            "$ref": "#/definitions/models.DeleteResponse"
+                        }
+                    },
+                    "404": {
+                        "description": "Error response if singer not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            },
+            "patch": {
+                "description": "Updates an existing singer in the database by ID",
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "singers"
+                ],
+                "summary": "Edit a singer",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Singer ID",
+                        "name": "id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "Singer data to update",
+                        "name": "singer",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/models.Singer"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with the updated singer data",
+                        "schema": {
+                            "$ref": "#/definitions/models.Singer"
+                        }
+                    },
+                    "400": {
+                        "description": "Error response with validation message",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "404": {
+                        "description": "Error response if singer not found",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        },
+        "/{name}": {
+            "get": {
+                "description": "Returns a personalized greeting message",
+                "produces": [
+                    "application/json"
+                ],
+                "tags": [
+                    "name"
+                ],
+                "summary": "Get personalized greeting",
+                "parameters": [
+                    {
+                        "type": "string",
+                        "description": "Name for the greeting",
+                        "name": "name",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Successful response with greeting",
+                        "schema": {
+                            "$ref": "#/definitions/models.GreetingResponse"
+                        }
+                    },
+                    "400": {
+                        "description": "Error response for invalid parameters",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "500": {
+                        "description": "Internal server error",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "type": "string"
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "gorm.DeletedAt": {
+            "type": "object",
+            "properties": {
+                "time": {
+                    "type": "string"
+                },
+                "valid": {
+                    "description": "Valid is true if Time is not NULL",
+                    "type": "boolean"
+                }
+            }
+        },
+        "models.DeleteResponse": {
+            "type": "object",
+            "properties": {
+                "data": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.GreetingResponse": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.Singer": {
+            "type": "object",
+            "properties": {
+                "artist_name": {
+                    "type": "string"
+                },
+                "createdAt": {
+                    "type": "string"
+                },
+                "deletedAt": {
+                    "$ref": "#/definitions/gorm.DeletedAt"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "musical_genre": {
+                    "type": "string"
+                },
+                "song_name": {
+                    "type": "string"
+                },
+                "updatedAt": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}

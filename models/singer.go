@@ -12,6 +12,14 @@ type Singer struct {
 	MusicalGenre string `json:"musical_genre" validate:"nonzero, len=6, regexp=^[a-zA-Z]*$"`
 }
 
+type GreetingResponse struct {
+	Message string `json:"message"`
+}
+
+type DeleteResponse struct {
+	Data string `json:"data"`
+}
+
 func ValidateSingerData(singer *Singer) error {
 	if err := validator.Validate(singer); err != nil {
 		return err

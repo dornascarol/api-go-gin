@@ -1,0 +1,231 @@
+definitions:
+  gorm.DeletedAt:
+    properties:
+      time:
+        type: string
+      valid:
+        description: Valid is true if Time is not NULL
+        type: boolean
+    type: object
+  models.DeleteResponse:
+    properties:
+      data:
+        type: string
+    type: object
+  models.GreetingResponse:
+    properties:
+      message:
+        type: string
+    type: object
+  models.Singer:
+    properties:
+      artist_name:
+        type: string
+      createdAt:
+        type: string
+      deletedAt:
+        $ref: '#/definitions/gorm.DeletedAt'
+      id:
+        type: integer
+      musical_genre:
+        type: string
+      song_name:
+        type: string
+      updatedAt:
+        type: string
+    type: object
+info:
+  contact: {}
+paths:
+  /{name}:
+    get:
+      description: Returns a personalized greeting message
+      parameters:
+      - description: Name for the greeting
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response with greeting
+          schema:
+            $ref: '#/definitions/models.GreetingResponse'
+        "400":
+          description: Error response for invalid parameters
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "500":
+          description: Internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get personalized greeting
+      tags:
+      - name
+  /singers:
+    get:
+      description: Retrieves a list of all singers from the database
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response with a list of singers
+          schema:
+            items:
+              $ref: '#/definitions/models.Singer'
+            type: array
+        "500":
+          description: Error response for internal server error
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get all singers
+      tags:
+      - singers
+    post:
+      consumes:
+      - application/json
+      description: Adds a new singer to the database
+      parameters:
+      - description: Singer data
+        in: body
+        name: singer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Singer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response with the created singer data
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "400":
+          description: Error response with validation message
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Create a new singer
+      tags:
+      - singers
+  /singers/{id}:
+    delete:
+      description: Deletes a singer from the database by ID
+      parameters:
+      - description: Singer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response with deletion message
+          schema:
+            $ref: '#/definitions/models.DeleteResponse'
+        "404":
+          description: Error response if singer not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Delete a singer
+      tags:
+      - singers
+    get:
+      description: Retrieves a singer from the database by their ID
+      parameters:
+      - description: Singer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response with the singer data
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "404":
+          description: Error response if singer not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a singer by ID
+      tags:
+      - singers
+    patch:
+      consumes:
+      - application/json
+      description: Updates an existing singer in the database by ID
+      parameters:
+      - description: Singer ID
+        in: path
+        name: id
+        required: true
+        type: integer
+      - description: Singer data to update
+        in: body
+        name: singer
+        required: true
+        schema:
+          $ref: '#/definitions/models.Singer'
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response with the updated singer data
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "400":
+          description: Error response with validation message
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+        "404":
+          description: Error response if singer not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Edit a singer
+      tags:
+      - singers
+  /singers/name/{name}:
+    get:
+      description: Retrieves a singer from the database by their artist name
+      parameters:
+      - description: Artist name
+        in: path
+        name: name
+        required: true
+        type: string
+      produces:
+      - application/json
+      responses:
+        "200":
+          description: Successful response with the singer data
+          schema:
+            $ref: '#/definitions/models.Singer'
+        "404":
+          description: Error response if singer not found
+          schema:
+            additionalProperties:
+              type: string
+            type: object
+      summary: Get a singer by name
+      tags:
+      - singers
+swagger: "2.0"
