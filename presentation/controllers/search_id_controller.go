@@ -3,8 +3,7 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/dornascarol/api-go-gin/database"
-	"github.com/dornascarol/api-go-gin/models"
+	"github.com/dornascarol/api-go-gin/application/usecases"
 	"github.com/gin-gonic/gin"
 )
 
@@ -17,14 +16,22 @@ import (
 // @Success      200  {object}  models.Singer "Successful response with the singer data"
 // @Failure      404  {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/{id} [get]
-func SearchSingerById(c *gin.Context) {
-	var singer models.Singer
-	id := c.Params.ByName("id")
-	database.DB.First(&singer, id)
+type SearchSingerByIdController struct {
+	Usecase *usecases.SingersUseCase
+}
 
-	if singer.ID == 0 {
-		c.JSON(http.StatusNotFound, gin.H{
-			"Not found": "Singer not found"})
+func NewSearchSingerByIdController(uc *usecases.SingersUseCase) *SearchSingerByIdController {
+	return &SearchSingerByIdController{
+		Usecase: uc,
+	}
+}
+
+func (cc *SearchSingerByIdController) SearchSingerById(c *gin.Context) {
+	id := c.Param("id")
+
+	singer, err := cc.Usecase.GetSingerByID(c.Request.Context(), id)
+	if err != nil {
+		c.JSON(http.StatusNotFound, gin.H{"error": "Singer not found"})
 		return
 	}
 

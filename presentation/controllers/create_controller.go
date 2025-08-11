@@ -3,8 +3,8 @@ package controllers
 import (
 	"net/http"
 
-	"github.com/dornascarol/api-go-gin/database"
-	"github.com/dornascarol/api-go-gin/models"
+	"github.com/dornascarol/api-go-gin/application/usecases"
+	"github.com/dornascarol/api-go-gin/domain/entities"
 	"github.com/gin-gonic/gin"
 )
 
@@ -18,8 +18,18 @@ import (
 // @Success      200     {object}  models.Singer "Successful response with the created singer data"
 // @Failure      400     {object}  map[string]string "Error response with validation message"
 // @Router       /singers [post]
-func CreateNewSinger(c *gin.Context) {
-	var singer models.Singer
+type CreateSingerController struct {
+	Usecase *usecases.SingersUseCase
+}
+
+func NewCreateSingerController(uc *usecases.SingersUseCase) *CreateSingerController {
+	return &CreateSingerController{
+		Usecase: uc,
+	}
+}
+
+func (cc *CreateSingerController) CreateNewSinger(c *gin.Context) {
+	var singer entities.Singer
 
 	if err := c.ShouldBindJSON(&singer); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
@@ -27,12 +37,17 @@ func CreateNewSinger(c *gin.Context) {
 		return
 	}
 
-	if err := models.ValidateSingerData(&singer); err != nil {
+	if err := entities.ValidateSingerData(&singer); err != nil {
 		c.JSON(http.StatusBadRequest, gin.H{
 			"error": err.Error()})
 		return
 	}
 
-	database.DB.Create(&singer)
-	c.JSON(http.StatusOK, singer)
+	created, err := cc.Usecase.CreateSinger(c.Request.Context(), &singer)
+	if err != nil {
+		c.JSON(http.StatusInternalServerError, gin.H{"error": err.Error()})
+		return
+	}
+
+	c.JSON(http.StatusOK, created)
 }
