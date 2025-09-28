@@ -502,7 +502,7 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
    ginSwagger "github.com/swaggo/gin-swagger"
     ```
 
-URL: `http://localhost:8080/swagger/singers/v1/index.html`
+URL: `http://localhost:8080/swagger/index.html`
 
 
 ## Project status
