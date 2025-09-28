@@ -1,3 +1,4 @@
+basePath: /
 definitions:
   gorm.DeletedAt:
     properties:
@@ -34,8 +35,17 @@ definitions:
       updatedAt:
         type: string
     type: object
+host: localhost:8080
 info:
-  contact: {}
+  contact:
+    url: https://github.com/dornascarol
+  description: This is a sample API built with Go and Gin framework.
+  license:
+    name: MIT
+    url: https://opensource.org/licenses/MIT
+  termsOfService: http://swagger.io/terms/
+  title: API Go Gin - Swagger Documentation
+  version: "1.0"
 paths:
   /{name}:
     get:
@@ -124,7 +134,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -148,7 +158,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       produces:
       - application/json
       responses:
@@ -174,7 +184,7 @@ paths:
         in: path
         name: id
         required: true
-        type: integer
+        type: string
       - description: Singer data to update
         in: body
         name: singer

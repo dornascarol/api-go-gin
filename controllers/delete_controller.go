@@ -13,7 +13,7 @@ import (
 // @Description  Deletes a singer from the database by ID
 // @Tags         singers
 // @Produce      json
-// @Param        id   path      int  true  "Singer ID"
+// @Param        id   path      string  true  "Singer ID"
 // @Success      200  {object}  models.DeleteResponse "Successful response with deletion message"
 // @Failure      404  {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/{id} [delete]

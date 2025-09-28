@@ -10,7 +10,7 @@ import (
 
 func HandleRequests() {
 	r := gin.Default()
-	docs.SwaggerInfo.BasePath = "/singers/v1"
+	docs.SwaggerInfo.BasePath = "/"
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./assets")
 	r.GET("/singers", controllers.GetSingers)
