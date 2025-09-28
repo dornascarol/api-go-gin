@@ -13,7 +13,7 @@ import (
 // @Description  Retrieves a singer from the database by their ID
 // @Tags         singers
 // @Produce      json
-// @Param        id   path      int  true  "Singer ID"
+// @Param        id   path      string  true  "Singer ID"
 // @Success      200  {object}  models.Singer "Successful response with the singer data"
 // @Failure      404  {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/{id} [get]
