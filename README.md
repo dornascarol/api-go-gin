@@ -86,12 +86,12 @@ _Another way to run Docker_
   
 2. **To run the containers, write the next command in the terminal:**
 	```
-	docker start gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+	docker start gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1 redis-cache
 	```
   
 3. **Stop the containers with the command in the terminal:**
 	```
-	docker stop gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+	docker stop gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1 redis-cache
 	```
 
 - URL to access pgAdmin:
