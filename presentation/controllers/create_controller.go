@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"context"
 	"net/http"
 
-	"github.com/dornascarol/api-go-gin/application/usecases"
 	"github.com/dornascarol/api-go-gin/domain/entities"
 	"github.com/gin-gonic/gin"
 )
@@ -18,11 +18,16 @@ import (
 // @Success      200     {object}  models.Singer "Successful response with the created singer data"
 // @Failure      400     {object}  map[string]string "Error response with validation message"
 // @Router       /singers [post]
-type CreateSingerController struct {
-	Usecase *usecases.SingersUseCase
+
+type CreateSingerUsecase interface {
+	CreateSinger(ctx context.Context, singer *entities.Singer) (*entities.Singer, error)
 }
 
-func NewCreateSingerController(uc *usecases.SingersUseCase) *CreateSingerController {
+type CreateSingerController struct {
+	Usecase CreateSingerUsecase
+}
+
+func NewCreateSingerController(uc CreateSingerUsecase) *CreateSingerController {
 	return &CreateSingerController{
 		Usecase: uc,
 	}

@@ -14,10 +14,10 @@ import (
 
 type SingersUseCase struct {
 	SingerRepo   repositories.SingerRepository
-	CacheService *cache.CacheService
+	CacheService cache.CacheServiceInterface
 }
 
-func NewSingersUseCase(repo repositories.SingerRepository, cache *cache.CacheService) *SingersUseCase {
+func NewSingersUseCase(repo repositories.SingerRepository, cache cache.CacheServiceInterface) *SingersUseCase {
 	return &SingersUseCase{
 		SingerRepo:   repo,
 		CacheService: cache,

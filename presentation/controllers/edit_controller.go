@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"context"
 	"net/http"
 
-	"github.com/dornascarol/api-go-gin/application/usecases"
 	"github.com/dornascarol/api-go-gin/domain/entities"
 	"github.com/gin-gonic/gin"
 )
@@ -20,11 +20,16 @@ import (
 // @Failure      400    {object}  map[string]string "Error response with validation message"
 // @Failure      404    {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/{id} [patch]
-type EditSingerController struct {
-	Usecase *usecases.SingersUseCase
+
+type EditSingerUsecase interface {
+	UpdateSinger(ctx context.Context, id string, updated *entities.Singer) (*entities.Singer, error)
 }
 
-func NewEditSingerController(uc *usecases.SingersUseCase) *EditSingerController {
+type EditSingerController struct {
+	Usecase EditSingerUsecase
+}
+
+func NewEditSingerController(uc EditSingerUsecase) *EditSingerController {
 	return &EditSingerController{
 		Usecase: uc,
 	}

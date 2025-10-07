@@ -1,9 +1,10 @@
 package controllers
 
 import (
+	"context"
 	"net/http"
 
-	"github.com/dornascarol/api-go-gin/application/usecases"
+	"github.com/dornascarol/api-go-gin/domain/entities"
 	"github.com/gin-gonic/gin"
 )
 
@@ -16,11 +17,16 @@ import (
 // @Success      200   {object}  models.Singer "Successful response with the singer data"
 // @Failure      404   {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/name/{name} [get]
-type SearchSingerByNameController struct {
-	Usecase *usecases.SingersUseCase
+
+type SearchSingerByNameUsecase interface {
+	GetSingerByName(ctx context.Context, name string) (*entities.Singer, error)
 }
 
-func NewSearchSingerByNameController(uc *usecases.SingersUseCase) *SearchSingerByNameController {
+type SearchSingerByNameController struct {
+	Usecase SearchSingerByNameUsecase
+}
+
+func NewSearchSingerByNameController(uc SearchSingerByNameUsecase) *SearchSingerByNameController {
 	return &SearchSingerByNameController{
 		Usecase: uc,
 	}

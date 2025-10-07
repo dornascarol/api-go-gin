@@ -1,9 +1,9 @@
 package controllers
 
 import (
+	"context"
 	"net/http"
 
-	"github.com/dornascarol/api-go-gin/application/usecases"
 	"github.com/dornascarol/api-go-gin/domain/entities"
 	"github.com/gin-gonic/gin"
 )
@@ -17,11 +17,16 @@ import (
 // @Success      200  {object}  models.DeleteResponse "Successful response with deletion message"
 // @Failure      404  {object}  map[string]string "Error response if singer not found"
 // @Router       /singers/{id} [delete]
-type DeleteSingerController struct {
-	Usecase *usecases.SingersUseCase
+
+type DeleteSingerUsecase interface {
+	DeleteSinger(ctx context.Context, id string) error
 }
 
-func NewDeleteSingerController(uc *usecases.SingersUseCase) *DeleteSingerController {
+type DeleteSingerController struct {
+	Usecase DeleteSingerUsecase
+}
+
+func NewDeleteSingerController(uc DeleteSingerUsecase) *DeleteSingerController {
 	return &DeleteSingerController{
 		Usecase: uc,
 	}
