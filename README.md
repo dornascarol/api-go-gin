@@ -25,6 +25,7 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package fmt
 * Index.HTML
 * Swagger
+* Cache in Redis
 
 
 ## Specs
@@ -37,6 +38,8 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 ➥ Template in HTML rendering
 
 ➥ Swagger
+
+➥ Cache
 
 
 ## Tools
@@ -350,6 +353,18 @@ Example of 200 - OK
       PGADMIN_DEFAULT_PASSWORD: "123456"
     ports:
       - "54321:80"
+```
+
+
+## Redis image
+```
+  redis:
+    image: redis:latest
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
 ```
 
 
