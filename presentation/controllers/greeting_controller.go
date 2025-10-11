@@ -1,7 +1,7 @@
 package controllers
 
 import (
-	"github.com/dornascarol/api-go-gin/models"
+	"github.com/dornascarol/api-go-gin/domain/entities"
 	"github.com/gin-gonic/gin"
 )
 
@@ -15,9 +15,15 @@ import (
 // @Failure      400   {object}  map[string]string "Error response for invalid parameters"
 // @Failure      500   {object}  map[string]string "Internal server error"
 // @Router       /{name} [get]
-func Greeting(c *gin.Context) {
+type GreetingController struct{}
+
+func NewGreetingController() *GreetingController {
+    return &GreetingController{}
+}
+
+func (gc *GreetingController) Greeting(c *gin.Context) {
 	name := c.Params.ByName("name")
-	c.JSON(200, models.GreetingResponse{
+	c.JSON(200, entities.GreetingResponse{
 		Message: "Okay, " + name + "?",
 	})
 }

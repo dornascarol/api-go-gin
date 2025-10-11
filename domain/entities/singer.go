@@ -1,4 +1,4 @@
-package models
+package entities
 
 import (
 	"gopkg.in/validator.v2"
@@ -10,10 +10,6 @@ type Singer struct {
 	ArtistName   string `json:"artist_name" validate:"nonzero, min=1, max=50"`
 	SongName     string `json:"song_name" validate:"nonzero, min=1, max=100"`
 	MusicalGenre string `json:"musical_genre" validate:"nonzero, len=6, regexp=^[a-zA-Z]*$"`
-}
-
-type GreetingResponse struct {
-	Message string `json:"message"`
 }
 
 type DeleteResponse struct {
