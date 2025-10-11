@@ -14,7 +14,7 @@ import (
 // @Tags         singers
 // @Accept       json
 // @Produce      json
-// @Param        id     path      int           true  "Singer ID"
+// @Param        id     path      string           true  "Singer ID"
 // @Param        singer body      models.Singer true  "Singer data to update"
 // @Success      200    {object}  models.Singer "Successful response with the updated singer data"
 // @Failure      400    {object}  map[string]string "Error response with validation message"

@@ -9,7 +9,14 @@ const docTemplate = `{
     "info": {
         "description": "{{escape .Description}}",
         "title": "{{.Title}}",
-        "contact": {},
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "url": "https://github.com/dornascarol"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
         "version": "{{.Version}}"
     },
     "host": "{{.Host}}",
@@ -138,7 +145,7 @@ const docTemplate = `{
                 "summary": "Get a singer by ID",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Singer ID",
                         "name": "id",
                         "in": "path",
@@ -174,7 +181,7 @@ const docTemplate = `{
                 "summary": "Delete a singer",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Singer ID",
                         "name": "id",
                         "in": "path",
@@ -213,7 +220,7 @@ const docTemplate = `{
                 "summary": "Edit a singer",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Singer ID",
                         "name": "id",
                         "in": "path",
@@ -365,12 +372,12 @@ const docTemplate = `{
 
 // SwaggerInfo holds exported Swagger Info so clients can modify it
 var SwaggerInfo = &swag.Spec{
-	Version:          "",
-	Host:             "",
-	BasePath:         "",
+	Version:          "1.0",
+	Host:             "localhost:8080",
+	BasePath:         "/",
 	Schemes:          []string{},
-	Title:            "",
-	Description:      "",
+	Title:            "API Go Gin - Swagger Documentation",
+	Description:      "This is a sample API built with Go and Gin framework.",
 	InfoInstanceName: "swagger",
 	SwaggerTemplate:  docTemplate,
 	LeftDelim:        "{{",

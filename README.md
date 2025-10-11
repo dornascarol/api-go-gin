@@ -25,6 +25,7 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 * Package fmt
 * Index.HTML
 * Swagger
+* Cache in Redis
 
 
 ## Specs
@@ -37,6 +38,8 @@ Developing a CRUD API using the Gin-Gonic framework with the objective of deepen
 ➥ Template in HTML rendering
 
 ➥ Swagger
+
+➥ Cache
 
 
 ## Tools
@@ -86,12 +89,12 @@ _Another way to run Docker_
   
 2. **To run the containers, write the next command in the terminal:**
 	```
-	docker start gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+	docker start gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1 redis-cache
 	```
   
 3. **Stop the containers with the command in the terminal:**
 	```
-	docker stop gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1
+	docker stop gin-api-rest-pgadmin-compose-1 gin-api-rest-postgres-1 redis-cache
 	```
 
 - URL to access pgAdmin:
@@ -353,6 +356,18 @@ Example of 200 - OK
 ```
 
 
+## Redis image
+```
+  redis:
+    image: redis:latest
+    container_name: redis-cache
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis-data:/data
+```
+
+
 ## Tests
 This project includes automated testing to validate essential functionalities. Running the test with at least one registered singer, in order to create and delete the mock for a singer ID. Below are the main tests implemented:
 
@@ -502,7 +517,7 @@ From the <a href="https://github.com/swaggo/echo-swagger" target="_blank"> docum
    ginSwagger "github.com/swaggo/gin-swagger"
     ```
 
-URL: `http://localhost:8080/swagger/singers/v1/index.html`
+URL: `http://localhost:8080/swagger/index.html`
 
 
 ## Project status

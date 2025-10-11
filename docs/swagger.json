@@ -1,8 +1,20 @@
 {
     "swagger": "2.0",
     "info": {
-        "contact": {}
+        "description": "This is a sample API built with Go and Gin framework.",
+        "title": "API Go Gin - Swagger Documentation",
+        "termsOfService": "http://swagger.io/terms/",
+        "contact": {
+            "url": "https://github.com/dornascarol"
+        },
+        "license": {
+            "name": "MIT",
+            "url": "https://opensource.org/licenses/MIT"
+        },
+        "version": "1.0"
     },
+    "host": "localhost:8080",
+    "basePath": "/",
     "paths": {
         "/singers": {
             "get": {
@@ -127,7 +139,7 @@
                 "summary": "Get a singer by ID",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Singer ID",
                         "name": "id",
                         "in": "path",
@@ -163,7 +175,7 @@
                 "summary": "Delete a singer",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Singer ID",
                         "name": "id",
                         "in": "path",
@@ -202,7 +214,7 @@
                 "summary": "Edit a singer",
                 "parameters": [
                     {
-                        "type": "integer",
+                        "type": "string",
                         "description": "Singer ID",
                         "name": "id",
                         "in": "path",

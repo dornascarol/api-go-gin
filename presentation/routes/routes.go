@@ -9,8 +9,8 @@ import (
 )
 
 func HandleRequests(
-    singerController *controllers.SingerController,
-    createSingerController *controllers.CreateSingerController,
+	singerController *controllers.SingerController,
+	createSingerController *controllers.CreateSingerController,
 	searchSingerByIdController *controllers.SearchSingerByIdController,
 	deleteSingerController *controllers.DeleteSingerController,
 	editSingerController *controllers.EditSingerController,
@@ -19,9 +19,9 @@ func HandleRequests(
 	indexPageController *controllers.IndexPageController,
 	notFoundController *controllers.NotFoundController,
 ) *gin.Engine {
-	
+
 	r := gin.Default()
-	docs.SwaggerInfo.BasePath = "/singers/v1"
+	docs.SwaggerInfo.BasePath = "/"
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./assets")
 
